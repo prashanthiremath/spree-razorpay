@@ -17,6 +17,7 @@
   
 <script>
 $(document).ready(function(){
+  var $loading = $('#loading').hide();
  $loading.hide();
   $("#razorpay").click(function() {
     var options = {
@@ -25,6 +26,7 @@ $(document).ready(function(){
         'name': "<%= payment_method.preferences[:merchant_name] %>",
         'description': "<%= payment_method.preferences[:merchant_description] %>",
         "handler": function (response){
+          var $loading = $('#loading').hide();
           $(document).ajaxStart(function() {
              $loading.show();
           });
