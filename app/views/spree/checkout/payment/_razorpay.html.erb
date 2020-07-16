@@ -6,7 +6,9 @@
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 
-
+ <div id="loading">
+   <img src="https://i.ytimg.com/vi/weY3e3KNwPw/maxresdefault.jpg" />  
+ </div>
 
 
   <div id='razorpay' class='btn razorpay-payment-button pull-right'>
@@ -32,12 +34,10 @@ $(document).ready(function(){
         'name': "<%= payment_method.preferences[:merchant_name] %>",
         'description': "<%= payment_method.preferences[:merchant_description] %>",
         "handler": function (response){
-          $(document).ajaxStart(function() {
-            if (!jQuery.fn.block) {
-               $.blockUI({ message: $('#blockUI-message') });
-                  } else {
-                 console.log("hurray already loaded");
-            }
+          var $loading = $('#loading').hide();
+          $(document).ajaxStart(function () {
+                        //ajax request went so show the loading image
+           })
           });
           $.ajax({
             type: 'POST',
@@ -45,11 +45,7 @@ $(document).ready(function(){
             data: { payment_method_id: "<%= payment_method.id %>", razorpay_payment_id: response.razorpay_payment_id },
             dataType: 'html'
           }).done(function(data){
-            if (!jQuery.fn.block) {
-               $.blockUI({ message: $('#blockUI-message') });
-                  } else {
-                 console.log("hurray already loaded");
-            }
+             $loading.hide();
             setTimeout(function(){
               window.location.replace("/orders/<%= current_order.number %>");
             }, 5000);
