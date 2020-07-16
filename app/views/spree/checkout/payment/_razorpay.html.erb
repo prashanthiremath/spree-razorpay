@@ -32,7 +32,11 @@ $(document).ready(function(){
         'description': "<%= payment_method.preferences[:merchant_description] %>",
         "handler": function (response){
           $(document).ajaxStart(function() {
-            $.blockUI({ message: $('#blockUI-message') });
+            if (!jQuery.fn.block) {
+               $.blockUI({ message: $('#blockUI-message') });
+                  } else {
+                 console.log("hurray already loaded");
+            }
           });
           $.ajax({
             type: 'POST',
@@ -40,7 +44,11 @@ $(document).ready(function(){
             data: { payment_method_id: "<%= payment_method.id %>", razorpay_payment_id: response.razorpay_payment_id },
             dataType: 'html'
           }).done(function(data){
-            $.blockUI({ message: $('#blockUI-message') });
+            if (!jQuery.fn.block) {
+               $.blockUI({ message: $('#blockUI-message') });
+                  } else {
+                 console.log("hurray already loaded");
+            }
             setTimeout(function(){
               window.location.replace("/orders/<%= current_order.number %>");
             }, 5000);
