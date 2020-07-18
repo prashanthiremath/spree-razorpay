@@ -55,7 +55,7 @@ $(document).ready(function(){
             data: { payment_method_id: "<%= payment_method.id %>", razorpay_payment_id: response.razorpay_payment_id },
             dataType: 'html'
           }).done(function(data){
-             $(".overlay").show();
+             $(".overlay_new").show();
              $("#checkout-page").css("opacity", 0.2);
             setTimeout(function(){
               window.location.replace("/orders/<%= current_order.number %>");
