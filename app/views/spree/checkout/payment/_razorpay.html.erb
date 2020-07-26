@@ -39,7 +39,7 @@ $(document).ready(function(){
   $("#razorpay").click(function() {
     var options = {
         "key": "<%= payment_method.preferences[:key_id] %>",
-        "amount": "<%= current_order.total %>",
+        "amount": "<%= current_order.total.to_i %>",
         'name': "<%= payment_method.preferences[:merchant_name] %>",
         'description': "<%= payment_method.preferences[:merchant_description] %>",
         "handler": function (response){
